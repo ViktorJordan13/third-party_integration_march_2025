@@ -1,0 +1,2 @@
+1. Isprobajte go ova third party API: https://rickandmortyapi.com/api
+2. Napravete si account, api_key i verfied sender na mailgun -> https://app.mailgun.com/
