@@ -1,0 +1,2 @@
+1. Za utre napravete go istovo so go napraviv jas, megutoa so vasi credentials i sender mail na mailgun
+OPTIONAL: Napravete istrazuvanje za drugi third-party APIs za prakanje mejlovi kako mailgun (na primer Sendgrid)
