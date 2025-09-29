@@ -1,5 +1,5 @@
-const sendMail = require('../services/mailer'); 
-const { validate, MailgunFields } = require('../../pkg/mailgun/validate');
+const { sendMail } = require('../pkg/mailgun');
+const { validate, MailgunFields } = require('../pkg/mailgun/validate');
 
 const sendWelcomeMail = async (req, res) => {
     try {
