@@ -17,7 +17,7 @@ const register = async (req, res) => {
         if(exist){
             return res.status(400).send("Account with this Email already exists");
         }
-        req.body.password = await bcrypt.hash(req.body.password);
+        req.body.password = bcrypt.hashSync(req.body.password);
         const acc = await account.create(req.body);
         return res.status(201).send(acc);
 
@@ -89,7 +89,7 @@ const forgetPassword = async (req, res) => {
     const link = `http://localhost:10000/reset-password/${user.id}/${token}`;
     console.log("link", link);
     try{
-        await sendMail(user.email, "PASSWORD_RESET", { user, link});
+        await sendMail(user.email, "PASSWORD_TEMPLATE", { user, link});
         return res.status(200).send("Password reset link has been sent to your email account.");
     }catch(err){
         console.log(err);
@@ -110,7 +110,7 @@ const resetPassTemplate = async (req, res) => {
 
     try{
         const payload = jwt.verify(token, secret);
-        res.render("reset_password", { email: user.email });
+        res.render("reset-password", { email: user.email });
     }catch(err){
         res.send(err.message);
     }
@@ -118,9 +118,9 @@ const resetPassTemplate = async (req, res) => {
 
 const resetPassword = async (req, res) => {
     const { id, token } = req.params;
-    const { password, confirm_password } = req.body;
+    const { password, confirmPass } = req.body;
 
-    if (password !== confirm_password){
+    if (password !== confirmPass){
         return res.status(400).send("Password and confirm password do not match.");
     }
 
@@ -134,7 +134,7 @@ const resetPassword = async (req, res) => {
 
     try{
         const payload = jwt.verify(token, secret);
-        const newPasswordHashed = await bcrypt.hash(password);
+        const newPasswordHashed = bcrypt.hashSync(password);
         await account.setNewPassword(user.id, newPasswordHashed);
         user.password = password;
         res.send(user);

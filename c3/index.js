@@ -33,7 +33,7 @@ api.use(
         path: [
             "/api/v1/auth/login",
             "/api/v1/auth/register",
-            "/api/v1/auth/forget-password",
+            "/api/v1/auth/forgot-password",
         ],
     })
 )
@@ -43,10 +43,10 @@ api.post('/api/v1/auth/register', register);
 api.post('/api/v1/auth/login', login);
 
 api.get('/forgot-password', (req, res) =>{
-    res.render("forgot_password");
+    res.render("forgot-password");
 });
 
-api.post('/api/v1/auth/forget-password', forgetPassword);
+api.post('/api/v1/auth/forgot-password', forgetPassword);
 
 api.get('/reset-password/:id/:token', resetPassTemplate);
 api.post('/reset-password/:id/:token', resetPassword);
